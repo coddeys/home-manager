@@ -4,7 +4,52 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  programs.bat.enable = true;
+  home.packages = with pkgs; [
+    brave
+    brightnessctl
+    browsh
+    chromium
+    ctags
+    dmenu
+    elm2nix
+    elmPackages.elm
+    elmPackages.elm-format
+    entr
+    firefox
+    fzf
+    gawk
+    ghc
+    git
+    gradle
+    mpd
+    mplayer
+    mysql
+    ncdu
+    ncmpcpp
+    ncpamixer
+    nodejs
+    ormolu
+    pamixer
+    pavucontrol
+    slock
+    tabbed
+    tmate
+    zip
+    zsh-syntax-highlighting
+  ];
+
+  programs.direnv.enable = true;
+  programs.direnv.enableNixDirenvIntegration = true;
+
+  programs.neovim = {
+    enable = true;
+    vimAlias = true;
+
+    plugins = with pkgs.vimPlugins; [
+      vim-nix
+      fzf-vim
+    ];
+  };
 
 
   # Home Manager needs a bit of information about you and the
