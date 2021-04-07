@@ -8,6 +8,7 @@
     brave
     brightnessctl
     browsh
+    cabal-install
     chromium
     ctags
     dmenu
@@ -15,25 +16,35 @@
     elmPackages.elm
     elmPackages.elm-format
     entr
-    firefox
     fzf
     gawk
     ghc
+    gimp
     git
     gradle
+    jq
     mpd
     mplayer
+    mpv
     mysql
     ncdu
     ncmpcpp
     ncpamixer
+    niv
+    nodePackages.prettier
     nodejs
     ormolu
     pamixer
     pavucontrol
+    ripgrep
+    rsync
+    rtorrent
     slock
     tabbed
     tmate
+    tmux
+    unzip
+    vlc
     zip
     zsh-syntax-highlighting
   ];
@@ -51,6 +62,9 @@
     ];
   };
 
+  programs.firefox.enable = true;
+
+  services.lorri.enable = true;
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
