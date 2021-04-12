@@ -18,7 +18,7 @@
     entr
     fzf
     gawk
-    ghc
+    # ghc
     gimp
     git
     gradle
@@ -65,6 +65,16 @@
   programs.firefox.enable = true;
 
   services.lorri.enable = true;
+
+  # xsession = {
+  #   enable = true;
+  #   windowManager.xmonad = {
+  #     enable = true;
+  #     extraPackages = haskellPackages: [
+  #       haskellPackages.xmonad-contrib
+  #     ];
+  #   };
+  # };
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
