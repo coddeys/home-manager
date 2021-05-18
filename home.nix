@@ -8,8 +8,8 @@
     brave
     brightnessctl
     browsh
+    direnv
     cabal-install
-    chromium
     ctags
     dmenu
     elm2nix
@@ -18,14 +18,15 @@
     entr
     fzf
     gawk
-    # ghc
     gimp
     git
     gradle
     jq
+    lf
     mpd
     mplayer
     mpv
+    mupdf
     mysql
     ncdu
     ncmpcpp
@@ -45,11 +46,13 @@
     tmux
     unzip
     vlc
+    zathura
     zip
+    zsh
     zsh-syntax-highlighting
   ];
 
-  programs.direnv.enable = true;
+
   programs.direnv.enableNixDirenvIntegration = true;
 
   programs.neovim = {
@@ -58,6 +61,7 @@
 
     plugins = with pkgs.vimPlugins; [
       vim-nix
+      elm-vim
       fzf-vim
     ];
   };
@@ -66,15 +70,15 @@
 
   services.lorri.enable = true;
 
-  # xsession = {
-  #   enable = true;
-  #   windowManager.xmonad = {
-  #     enable = true;
-  #     extraPackages = haskellPackages: [
-  #       haskellPackages.xmonad-contrib
-  #     ];
-  #   };
-  # };
+  xsession = {
+    enable = true;
+    windowManager.xmonad = {
+      enable = true;
+      extraPackages = haskellPackages: [
+        haskellPackages.xmonad-contrib
+      ];
+    };
+  };
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
