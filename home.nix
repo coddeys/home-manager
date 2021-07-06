@@ -9,9 +9,11 @@
     brightnessctl
     browsh
     direnv
+    chromium
     cabal-install
     ctags
     dmenu
+    exercism
     elm2nix
     elmPackages.elm
     elmPackages.elm-format
@@ -40,6 +42,8 @@
     ripgrep
     rsync
     rtorrent
+    ruby
+    stack
     slock
     tabbed
     tmate
@@ -53,7 +57,7 @@
   ];
 
 
-  programs.direnv.enableNixDirenvIntegration = true;
+  programs.direnv.nix-direnv.enable = true;
 
   programs.neovim = {
     enable = true;
@@ -64,6 +68,51 @@
       elm-vim
       fzf-vim
     ];
+  };
+
+  programs.emacs = {
+    enable = false;
+
+    extraPackages = (epkgs:
+      (with epkgs; [
+        scratch
+        diminish
+        hydra
+        ivy
+        ivy-hydra
+        swiper
+        counsel
+        wgrep
+        projectile
+        counsel-projectile
+        anzu
+        dimmer
+        restclient
+        yaml-mode
+        avy
+        ace-window
+        magit
+        js2-mode
+        indium
+        prettier-js
+        typescript-mode
+        json-mode
+        haskell-mode
+        hindent
+        ormolu
+        dante
+        flycheck
+        company
+        smartparens
+        multiple-cursors
+        diff-hl
+        git-gutter
+        markdown-mode
+        mmm-mode
+        elm-mode
+        sass-mode
+        scss-mode
+      ]));
   };
 
   programs.firefox.enable = true;
