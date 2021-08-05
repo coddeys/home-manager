@@ -22,8 +22,7 @@
     gawk
     gimp
     git
-    gradle
-    jq
+    ghc
     lf
     mpd
     mplayer
@@ -35,7 +34,6 @@
     ncpamixer
     niv
     nodePackages.prettier
-    nodejs
     ormolu
     pamixer
     pavucontrol
@@ -71,49 +69,55 @@
   };
 
   programs.emacs = {
-    enable = false;
+    enable = true;
+    package = pkgs.emacs;
+
 
     extraPackages = (epkgs:
       (with epkgs; [
-        scratch
-        diminish
-        hydra
-        ivy
-        ivy-hydra
-        swiper
-        counsel
-        wgrep
-        projectile
-        counsel-projectile
-        anzu
-        dimmer
-        restclient
-        yaml-mode
-        avy
         ace-window
-        magit
-        js2-mode
-        indium
-        prettier-js
-        typescript-mode
-        json-mode
+        anzu
+        avy
+        company
+        counsel
+        counsel-projectile
+        dante
+        diff-hl
+        diminish
+        dimmer
+        elm-mode
+        flycheck
+        git-gutter
         haskell-mode
         hindent
-        ormolu
-        dante
-        flycheck
-        company
-        smartparens
-        multiple-cursors
-        diff-hl
-        git-gutter
+        hydra
+        indium
+        ivy
+        ivy-hydra
+        js2-mode
+        json-mode
+        magit
         markdown-mode
         mmm-mode
-        elm-mode
+        monokai-theme
+        multiple-cursors
+        nix-mode
+        ormolu
+        prettier-js
+        projectile
+        restclient
         sass-mode
+        scratch
         scss-mode
+        smartparens
+        swiper
+        typescript-mode
+        use-package
+        wgrep
+        yaml-mode
       ]));
   };
+
 
   programs.firefox.enable = true;
 
@@ -128,6 +132,7 @@
       ];
     };
   };
+
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
