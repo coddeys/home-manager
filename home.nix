@@ -20,19 +20,21 @@
     elmPackages.elm-test
     entr
     fzf
+    ghostscript
+    imagemagick
     gawk
     gimp
     git
     # ghc
     libreoffice
     lf
-    mpd
     mplayer
     mpv
     mupdf
     ncdu
     ncmpcpp
     ncpamixer
+    nodejs
     # niv
     # nixFlakes
     nodePackages.prettier
@@ -40,6 +42,7 @@
     pamixer
     pavucontrol
     ripgrep
+    ruby_3_0
     rsync
     rtorrent
     stack
@@ -278,6 +281,8 @@
   (global-set-key (kbd "C-c c") 'org-capture)
 
   (add-to-list 'auto-mode-alist '("\\.es6\\'" . js2-mode))
+  (add-to-list 'auto-mode-alist '("\\.tsx\\'" . js2-mode))
+  (setq js-indent-level 2)
 
   (global-set-key (kbd "C-:") 'avy-goto-char)
   (global-set-key (kbd "C-'") 'avy-goto-char-2)
@@ -302,6 +307,8 @@
         diff-hl
         diminish
         dimmer
+        docker
+        dockerfile-mode
         elm-mode
         evil
         flycheck
@@ -334,7 +341,6 @@
         scss-mode
         smartparens
         swiper
-        typescript-mode
         wgrep
         vterm
         yaml-mode
