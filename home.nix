@@ -290,7 +290,19 @@
   (avy-setup-default)
   (global-set-key (kbd "C-c C-j") 'avy-resume)
 
+  (global-evil-leader-mode)
   (evil-mode 1)
+  (evil-leader/set-leader "<SPC>")
+  (evil-leader/set-key
+  "f" 'find-file
+  "b" 'switch-to-buffer
+  "k" 'kill-buffer
+  "s" 'save-buffer
+  "2" 'split-window-below
+  "3" 'split-window-right
+  "0" 'delete-window
+  "o" 'other-window
+  "p" 'ace-window)
         '';
 
     extraPackages = (epkgs:
@@ -311,6 +323,7 @@
         dockerfile-mode
         elm-mode
         evil
+        evil-leader
         flycheck
         git-gutter
         graphql-mode
