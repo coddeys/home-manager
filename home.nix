@@ -4,13 +4,43 @@
   programs.home-manager.enable = true;
 
   home.packages = with pkgs; [
+    # Modern Unix
+    bat
+    exa
+    lsd
+    delta
+    duf
+    broot
+    fd
+    silver-searcher
+    fzf
+    mcfly
+    choose
+    jq
+    sd
+    cheat
+    tldr
+    bottom
+    glances
+    gtop
+    hyperfine
+    gping
+    procs
+    httpie
+    curlie
+    xh
+    zoxide
+    dog
     # autojump
+    htop
+    bob
     brightnessctl
     browsh
     bat
     direnv
     chromium
-    cabal-install
+    # cabal-install
+    cargo
     ctags
     dmenu
     exercism
@@ -19,14 +49,15 @@
     elmPackages.elm-format
     elmPackages.elm-test
     entr
-    fzf
     ghostscript
     imagemagick
     gawk
     gimp
     git
     # ghc
-    libreoffice
+    ffmpeg
+    keybase
+    #libreoffice
     lf
     mplayer
     mpv
@@ -38,18 +69,23 @@
     # niv
     # nixFlakes
     nodePackages.prettier
+    nomad
+    nyxt
     ormolu
+    # podman
     pamixer
     pavucontrol
     ripgrep
-    ruby_3_0
+    # ruby_3_0
     rsync
     rtorrent
-    stack
+    # stack
     tabbed
     tmate
     tmux
+    # termite
     termonad
+    tree
     unzip
     vlc
     zathura
@@ -57,6 +93,7 @@
     zip
     zsh
     zsh-syntax-highlighting
+    deno
   ];
 
 
@@ -213,16 +250,24 @@
   (global-set-key (kbd "C-x C-f") 'counsel-find-file)
   (global-set-key (kbd "C-x C-r") 'ivy-resume)
 
+  (global-flycheck-mode)
+
+
   (defvar projectile-indexing-method)
   (setq projectile-indexing-method 'alien)
   (defvar projectile-sort-order)
   (setq projectile-sort-order 'recently-active)
   (counsel-projectile-mode +1)
   (defvar projectile-mode-map)
-  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  (define-key projectile-mode-map (kbd "M-p") 'projectile-command-map)
   (setq-default projectile-mode-line-prefix " Proj")
+  (projectile-rails-global-mode)
+  (define-key projectile-rails-mode-map (kbd "C-c r") 'projectile-rails-command-map)
 
-  (add-hook 'ruby-mode-hook 'robe-mode)
+  ;;(add-hook 'ruby-mode-hook 'robe-mode)
+  (add-hook 'ruby-mode-hook #'rubocop-mode)
+  (setq rubocop-keymap-prefix (kbd "C-c C-x"))
+
 
   (setq-default dimmer-fraction 0.15)
   (add-hook 'after-init-hook 'dimmer-mode)
@@ -260,11 +305,10 @@
 
 
   (global-set-key (kbd "s-o") 'other-window)
-  (global-set-key (kbd "M-p") 'ace-window)
 
-  (smartparens-global-mode)
-  (show-smartparens-global-mode t)
-  (diminish 'smartparens-mode)
+  ;; (smartparens-global-mode)
+  ;; (show-smartparens-global-mode t)
+  ;; (diminish 'smartparens-mode)
 
   (outline-minor-mode 1)
 
@@ -281,7 +325,7 @@
   (global-set-key (kbd "C-c c") 'org-capture)
 
   (add-to-list 'auto-mode-alist '("\\.es6\\'" . js2-mode))
-  (add-to-list 'auto-mode-alist '("\\.tsx\\'" . js2-mode))
+  (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode))
   (setq js-indent-level 2)
 
   (global-set-key (kbd "C-:") 'avy-goto-char)
@@ -290,8 +334,16 @@
   (avy-setup-default)
   (global-set-key (kbd "C-c C-j") 'avy-resume)
 
-  (global-evil-leader-mode)
+  ;; aligns annotation to the right hand side
+  (setq company-tooltip-align-annotations t)
+  
+  (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
+  (setq evil-want-keybinding nil)
   (evil-mode 1)
+  (when (require 'evil-collection nil t)
+    (evil-collection-init))
+
+  (global-evil-leader-mode)
   (evil-leader/set-leader "<SPC>")
   (evil-leader/set-key
   "f" 'find-file
@@ -302,11 +354,59 @@
   "3" 'split-window-right
   "0" 'delete-window
   "o" 'other-window
-  "p" 'ace-window)
+  "p" 'ace-window
+  "a" 'align-regexp)
+
+  ;;(evil-set-initial-state 'ibuffer-mode 'normal)
+  ;;(evil-set-initial-state 'shell-mode 'emacs)
+
+  (which-key-mode)
+
+  ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
+  (setq lsp-keymap-prefix "C-l")
+  (add-hook 'typescript-mode-hook #'lsp)
+  (add-hook 'ruby-mode-hook #'lsp)
+  (add-hook 'js2-mode-hook #'lsp)
+  (add-hook 'vue-mode-hook #'lsp)
+  (add-hook 'js-mode-hook #'lsp)
+  (add-hook 'elm-mode-hook #'lsp)
+  (add-hook 'haskell-mode-hook #'lsp)
+  (add-hook 'yaml-mode-hook #'lsp)
+  (add-hook 'terraform-mode-hook #'lsp)
+  (add-hook 'markdown-mode-hook #'lsp)
+
+  (setq backup-directory-alist '((".*" . "~/.trash")))
+
+	(evil-leader/set-key
+	"m"  'neotree-toggle
+	"n"  'neotree-project-dir)
+
+  (setq projectile-switch-project-action 'neotree-projectile-action)
+
+  (with-eval-after-load 'flycheck
+    (flycheck-grammarly-setup))
+  (setq flycheck-grammarly-check-time 0.8)
+
+  (global-set-key (kbd "<f8>") 'org-tree-slide-mode)
+  (global-set-key (kbd "S-<f8>") 'org-tree-slide-skip-done-toggle)
+
+  (setq auto-save-file-name-transforms `((".", "~/.emacs-saves" t)))
+  (setq backup-directory-alist `(("." . "~/.emacs-saves")))
+  (setq backup-by-copying t)
+
+  ;;disable backup
+  (setq backup-inhibited t)
+  ;;disable auto save
+  (setq auto-save-default nil)
+
+  ;; Drag-and-drop to `dired`
+  (add-hook 'dired-mode-hook 'org-download-enable)
+  (setq-default org-download-image-dir "~/code/imgs")
         '';
 
     extraPackages = (epkgs:
       (with epkgs; [
+        neotree
         avy
         ace-window
         anzu
@@ -315,25 +415,39 @@
         counsel
         counsel-projectile
         csv-mode
-        dante
+        #dante
         diff-hl
         diminish
         dimmer
         docker
         dockerfile-mode
         elm-mode
+        earthfile-mode
         evil
         evil-leader
+        evil-collection
         flycheck
+        flycheck-grammarly
+        general
         git-gutter
         graphql-mode
+        haml-mode
         haskell-mode
+        # hslint
         hindent
         hydra
-        indium
+        # indium
         ivy
         ivy-hydra
         kotlin-mode
+        lsp-mode
+        lsp-haskell
+        dhall-mode
+        lsp-ui
+        lsp-treemacs
+        lsp-ivy
+        lsp-tailwindcss
+        dap-mode
         js2-mode
         json-mode
         vterm
@@ -344,9 +458,14 @@
         multiple-cursors
         nix-mode
         ormolu
+        org-tree-slide
+        org-download
+        moom
         prettier-js
         projectile
-        # projectile-rails
+        projectile-rails
+        robe
+        rspec-mode
         rubocop
         restclient
         sass-mode
@@ -354,8 +473,13 @@
         scss-mode
         smartparens
         swiper
+        terraform-mode
+        typescript-mode
+        #tide
         wgrep
+        which-key
         vterm
+        vue-mode
         yaml-mode
         yasnippet
       ]));
@@ -364,6 +488,15 @@
 
   programs.firefox.enable = true;
 
+  # programs.vscode = {
+  #   enable = true;
+  #   extensions = with pkgs.vscode-extensions; [
+  #     dracula-theme.theme-dracula
+  #     vscodevim.vim
+  #     yzhang.markdown-all-in-one
+  #   ];
+  # };
+  
   services.lorri.enable = true;
 
   xsession = {
