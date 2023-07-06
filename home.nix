@@ -5,6 +5,7 @@
 
   home.packages = with pkgs; [
     # Modern Unix
+    pocketbase
     bat
     exa
     lsd
@@ -20,6 +21,7 @@
     sd
     cheat
     tldr
+    vscodium
     bottom
     glances
     gtop
@@ -59,6 +61,7 @@
     keybase
     #libreoffice
     lf
+    mpd
     mplayer
     mpv
     mupdf
@@ -94,6 +97,8 @@
     zsh
     zsh-syntax-highlighting
     deno
+    overmind
+    hivemind
   ];
 
 
@@ -327,6 +332,12 @@
   (add-to-list 'auto-mode-alist '("\\.es6\\'" . js2-mode))
   (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode))
   (setq js-indent-level 2)
+  (setq typescript-indent-level 2)
+  (setq web-mode-code-indent-level 2)
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-code-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+  (setq web-mode-sql-indent-offset 2)
 
   (global-set-key (kbd "C-:") 'avy-goto-char)
   (global-set-key (kbd "C-'") 'avy-goto-char-2)
@@ -402,6 +413,8 @@
   ;; Drag-and-drop to `dired`
   (add-hook 'dired-mode-hook 'org-download-enable)
   (setq-default org-download-image-dir "~/code/imgs")
+  (setq dired-listing-switches "-agG")
+
         '';
 
     extraPackages = (epkgs:
