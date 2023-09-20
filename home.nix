@@ -1,4 +1,17 @@
 { config, pkgs, ... }:
+let
+  tex = (pkgs.texlive.combine {
+    inherit (pkgs.texlive) scheme-full babel xetex setspace fontspec
+                           chktex enumitem xifthen ifmtarg filehook
+                           upquote tools ms geometry graphics oberdiek
+                           fancyhdr lastpage xcolor etoolbox unicode-math
+                           ucharcat sourcesanspro tcolorbox pgf environ
+                           trimspaces parskip hyperref url euenc
+                           collection-fontsrecommended ragged2e
+                           framed paralist titlesec;
+    }
+  );
+in
 {
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
@@ -72,11 +85,13 @@
     # niv
     # nixFlakes
     nodePackages.prettier
+    nodePackages.mermaid-cli
     nomad
     nyxt
     ormolu
     # podman
     pamixer
+    pandoc
     pavucontrol
     ripgrep
     # ruby_3_0
@@ -84,12 +99,14 @@
     rtorrent
     # stack
     tabbed
+    tex
     tmate
     tmux
     # termite
     termonad
     tree
     unzip
+    vault
     vlc
     zathura
   #  youtube-dl
@@ -353,6 +370,9 @@
   (evil-mode 1)
   (when (require 'evil-collection nil t)
     (evil-collection-init))
+  (setq evil-search-module 'evil-search)
+  ;; (evil-set-undo-system 'undo-tree)
+  ;; (global-undo-tree-mode 1)
 
   (global-evil-leader-mode)
   (evil-leader/set-leader "<SPC>")
@@ -386,6 +406,10 @@
   (add-hook 'terraform-mode-hook #'lsp)
   (add-hook 'markdown-mode-hook #'lsp)
 
+
+  (add-to-list 'auto-mode-alist '("\\.mdx\\'" . markdown-mode))
+
+
   (setq backup-directory-alist '((".*" . "~/.trash")))
 
 	(evil-leader/set-key
@@ -415,10 +439,38 @@
   (setq-default org-download-image-dir "~/code/imgs")
   (setq dired-listing-switches "-agG")
 
+
+  (org-babel-do-load-languages
+     'org-babel-load-languages
+     '((mermaid . t)
+       (scheme . t)
+       ))
+
+  ;;Latex
+  (defun my-latex ()
+    (auto-fill-mode t)
+    (add-to-list 'TeX-view-program-selection '(output-pdf "Zathura"))
+
+  )
+
+  (setq org-latex-compiler "lualatex")
+  (setq org-preview-latex-default-process 'dvisvgm)
+  (add-hook 'LaTeX-mode-hook 'flyspell-mode)
+  (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+
+  (setq TeX-parse-self t)
+  (setq-default TeX-master nil)
+
+  (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+  (setq reftex-plug-into-AUCTeX t)
+
+  (add-hook 'LaTeX-mode-hook 'my-latex)
+
         '';
 
     extraPackages = (epkgs:
       (with epkgs; [
+        auctex
         neotree
         avy
         ace-window
@@ -439,6 +491,7 @@
         evil
         evil-leader
         evil-collection
+        undo-tree
         flycheck
         flycheck-grammarly
         general
@@ -471,6 +524,7 @@
         multiple-cursors
         nix-mode
         ormolu
+        ob-mermaid
         org-tree-slide
         org-download
         moom
@@ -486,6 +540,7 @@
         scss-mode
         smartparens
         swiper
+        tex
         terraform-mode
         typescript-mode
         #tide
@@ -525,8 +580,8 @@
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
-  home.username = "coddeys";
-  home.homeDirectory = "/home/coddeys";
+  home.username = "dima.sukhikh";
+  home.homeDirectory = "/home/dima.sukhikh";
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
