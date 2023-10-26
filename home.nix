@@ -8,7 +8,7 @@ let
                            ucharcat sourcesanspro tcolorbox pgf environ
                            trimspaces parskip hyperref url euenc
                            collection-fontsrecommended ragged2e
-                           framed paralist titlesec;
+                           framed paralist titlesec paratype inter;
     }
   );
 in
@@ -89,6 +89,7 @@ in
     nomad
     nyxt
     ormolu
+    just
     # podman
     pamixer
     pandoc
@@ -100,7 +101,9 @@ in
     # stack
     tabbed
     tex
+    texlab
     tmate
+    texworks
     tmux
     # termite
     termonad
@@ -287,7 +290,7 @@ in
   (define-key projectile-rails-mode-map (kbd "C-c r") 'projectile-rails-command-map)
 
   ;;(add-hook 'ruby-mode-hook 'robe-mode)
-  (add-hook 'ruby-mode-hook #'rubocop-mode)
+  ;;(add-hook 'ruby-mode-hook #'rubocop-mode)
   (setq rubocop-keymap-prefix (kbd "C-c C-x"))
 
 
@@ -355,6 +358,7 @@ in
   (setq web-mode-code-indent-offset 2)
   (setq web-mode-css-indent-offset 2)
   (setq web-mode-sql-indent-offset 2)
+  (setq css-indent-offset 2)
 
   (global-set-key (kbd "C-:") 'avy-goto-char)
   (global-set-key (kbd "C-'") 'avy-goto-char-2)
@@ -405,7 +409,10 @@ in
   (add-hook 'yaml-mode-hook #'lsp)
   (add-hook 'terraform-mode-hook #'lsp)
   (add-hook 'markdown-mode-hook #'lsp)
-
+  (add-hook 'tex-mode-hook #'lsp)
+  (add-hook 'latex-mode-hook #'lsp)
+  (add-hook 'scss-mode-hook #'lsp)
+  (add-hook 'css-mode-hook #'lsp)
 
   (add-to-list 'auto-mode-alist '("\\.mdx\\'" . markdown-mode))
 
@@ -486,6 +493,7 @@ in
         dimmer
         docker
         dockerfile-mode
+        editorconfig
         elm-mode
         earthfile-mode
         evil
@@ -516,6 +524,7 @@ in
         dap-mode
         js2-mode
         json-mode
+        just-mode
         vterm
         magit
         markdown-mode
