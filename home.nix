@@ -20,7 +20,7 @@ in
     # Modern Unix
     pocketbase
     bat
-    exa
+    eza
     lsd
     delta
     duf
@@ -68,6 +68,7 @@ in
     imagemagick
     gawk
     gimp
+    inkscape
     git
     # ghc
     ffmpeg
@@ -516,6 +517,7 @@ in
         kotlin-mode
         lsp-mode
         lsp-haskell
+        lsp-tailwindcss
         dhall-mode
         lsp-ui
         lsp-treemacs
@@ -529,6 +531,7 @@ in
         magit
         markdown-mode
         mmm-mode
+        minitest
         monokai-theme
         multiple-cursors
         nix-mode
