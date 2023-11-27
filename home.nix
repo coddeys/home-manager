@@ -88,6 +88,7 @@ in
     nodePackages.prettier
     nodePackages.mermaid-cli
     nomad
+    nixci
     nyxt
     ormolu
     just
@@ -103,6 +104,7 @@ in
     tabbed
     tex
     texlab
+    treefmt
     tmate
     texworks
     tmux
