@@ -109,7 +109,7 @@ in
     texworks
     tmux
     # termite
-    termonad
+    # termonad
     tree
     unzip
     vault
@@ -177,6 +177,13 @@ in
     ];
 
   };
+
+  services.emacs.package = pkgs.emacs-unstable;
+  nixpkgs.overlays = [
+    (import (builtins.fetchTarball {
+      url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
+    }))
+  ];
 
   programs.emacs = {
     enable = true;
@@ -476,6 +483,7 @@ in
 
   (add-hook 'LaTeX-mode-hook 'my-latex)
 
+  (apheleia-global-mode +1)
         '';
 
     extraPackages = (epkgs:
@@ -557,6 +565,7 @@ in
         tex
         terraform-mode
         typescript-mode
+        apheleia
         #tide
         wgrep
         which-key
