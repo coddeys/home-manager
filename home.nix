@@ -46,15 +46,15 @@ in
     xh
     zoxide
     dog
-    # autojump
     htop
     bob
+    brave
     brightnessctl
     browsh
     bat
     direnv
     chromium
-    # cabal-install
+    dbeaver
     cargo
     ctags
     dmenu
@@ -70,10 +70,9 @@ in
     gimp
     inkscape
     git
-    # ghc
+    gh
     ffmpeg
     keybase
-    #libreoffice
     lf
     mpd
     mplayer
@@ -83,8 +82,6 @@ in
     ncmpcpp
     ncpamixer
     nodejs
-    # niv
-    # nixFlakes
     nodePackages.prettier
     nodePackages.mermaid-cli
     nomad
@@ -92,15 +89,12 @@ in
     nyxt
     ormolu
     just
-    # podman
     pamixer
     pandoc
     pavucontrol
     ripgrep
-    # ruby_3_0
     rsync
     rtorrent
-    # stack
     tabbed
     tex
     texlab
@@ -108,14 +102,11 @@ in
     tmate
     texworks
     tmux
-    # termite
-    # termonad
     tree
     unzip
     vault
     vlc
     zathura
-  #  youtube-dl
     zip
     zsh
     zsh-syntax-highlighting
@@ -127,6 +118,17 @@ in
 
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
+
+  programs.obs-studio = {
+    enable = true;
+    plugins = with pkgs.obs-studio-plugins; [
+      wlrobs
+      obs-backgroundremoval
+      obs-pipewire-audio-capture
+      obs-vkcapture
+      obs-gstreamer
+    ];
+  };
 
   programs.neovim = {
     enable = true;
@@ -179,15 +181,18 @@ in
   };
 
   services.emacs.package = pkgs.emacs-unstable;
+
   nixpkgs.overlays = [
     (import (builtins.fetchTarball {
       url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
     }))
   ];
 
+  services.emacs.enable = true;
+
   programs.emacs = {
     enable = true;
-    package = pkgs.emacs;
+    package = pkgs.emacs-unstable;
 
     extraConfig =  ''
   (package-initialize)
@@ -455,7 +460,7 @@ in
   (add-hook 'dired-mode-hook 'org-download-enable)
   (setq-default org-download-image-dir "~/code/imgs")
   (setq dired-listing-switches "-agG")
-
+  (setq dired-dwim-target t)
 
   (org-babel-do-load-languages
      'org-babel-load-languages
@@ -483,34 +488,33 @@ in
 
   (add-hook 'LaTeX-mode-hook 'my-latex)
 
-  (apheleia-global-mode +1)
         '';
 
     extraPackages = (epkgs:
       (with epkgs; [
-        auctex
-        neotree
-        avy
         ace-window
         anzu
+        apheleia
+        auctex
+        avy
         avy
         company
         counsel
         counsel-projectile
         csv-mode
-        #dante
+        dap-mode
+        dhall-mode
         diff-hl
         diminish
         dimmer
         docker
         dockerfile-mode
+        earthfile-mode
         editorconfig
         elm-mode
-        earthfile-mode
         evil
-        evil-leader
         evil-collection
-        undo-tree
+        evil-leader
         flycheck
         flycheck-grammarly
         general
@@ -518,59 +522,57 @@ in
         graphql-mode
         haml-mode
         haskell-mode
-        # hslint
         hindent
         hydra
-        # indium
         ivy
         ivy-hydra
-        kotlin-mode
-        lsp-mode
-        lsp-haskell
-        lsp-tailwindcss
-        dhall-mode
-        lsp-ui
-        lsp-treemacs
-        lsp-ivy
-        lsp-tailwindcss
-        dap-mode
         js2-mode
         json-mode
         just-mode
-        vterm
+        kotlin-mode
+        lsp-haskell
+        lsp-ivy
+        lsp-mode
+        lsp-tailwindcss
+        lsp-treemacs
+        lsp-ui
         magit
         markdown-mode
-        mmm-mode
         minitest
+        mmm-mode
         monokai-theme
-        multiple-cursors
-        nix-mode
-        ormolu
-        ob-mermaid
-        org-tree-slide
-        org-download
         moom
+        multi-vterm
+        multiple-cursors
+        neotree
+        nix-mode
+        ob-mermaid
+        org-download
+        org-tree-slide
+        ormolu
         prettier-js
         projectile
         projectile-rails
+        restclient
         robe
         rspec-mode
         rubocop
-        restclient
         sass-mode
         scratch
         scss-mode
+        slim-mode
         smartparens
+        solidity-mode
         swiper
-        tex
         terraform-mode
+        tex
         typescript-mode
-        apheleia
-        #tide
-        wgrep
-        which-key
+        undo-tree
         vterm
         vue-mode
+        web-mode
+        wgrep
+        which-key
         yaml-mode
         yasnippet
       ]));
