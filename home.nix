@@ -8,15 +8,15 @@
     };
   };
 
-  home.username = "dima.sukhikh";
-  home.homeDirectory = "/home/dima.sukhikh";
+  home.username = "dima";
+  home.homeDirectory = "/home/dima";
 
   targets.genericLinux.enable = true;
 
-  home.stateVersion = "24.05";
+  home.stateVersion = "23.11";
 
   imports = [
-    ./emacs.nix
+   ./emacs.nix
     ./vim.nix
   ];
 
