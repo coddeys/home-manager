@@ -24,8 +24,11 @@
     bat
     bottom
     brave
+    brightnessctl
     chromium
+    crane
     direnv
+    dive
     dmenu
     docker-compose
     entr
@@ -45,7 +48,6 @@
     ncdu
     ncmpcpp
     pamixer
-    pavucontrol
     rtorrent
     silver-searcher
     tmate
