@@ -1,6 +1,9 @@
+{ config, pkgs, ... }:
 {
   programs.emacs = {
     enable = true;
+    # package = pkgs.emacs-unstable;
+    package = pkgs.emacs;
     extraConfig =  ''
   (package-initialize)
   (load-theme 'monokai t)
@@ -304,6 +307,7 @@
     extraPackages = (epkgs:
       (with epkgs; [
         ace-window
+        speed-type
         anzu
         aiken-mode
         apheleia

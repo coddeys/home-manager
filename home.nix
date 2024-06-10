@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   nixpkgs = {
@@ -19,6 +19,8 @@
     ./emacs.nix
     ./vim.nix
   ];
+
+  services.emacs.enable = true;
 
   home.packages = with pkgs; [
     bat
