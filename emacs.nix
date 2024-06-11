@@ -222,24 +222,6 @@
 
   (which-key-mode)
 
-  ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
-  (setq lsp-keymap-prefix "C-l")
-  (add-hook 'typescript-mode-hook #'lsp)
-  (add-hook 'ruby-mode-hook #'lsp)
-  (add-hook 'js2-mode-hook #'lsp)
-  (add-hook 'vue-mode-hook #'lsp)
-  (add-hook 'js-mode-hook #'lsp)
-  (add-hook 'elm-mode-hook #'lsp)
-  (add-hook 'haskell-mode-hook #'lsp)
-  (add-hook 'purescript-mode-hook #'lsp)
-  (add-hook 'yaml-mode-hook #'lsp)
-  (add-hook 'terraform-mode-hook #'lsp)
-  (add-hook 'markdown-mode-hook #'lsp)
-  (add-hook 'tex-mode-hook #'lsp)
-  (add-hook 'latex-mode-hook #'lsp)
-  (add-hook 'scss-mode-hook #'lsp)
-  (add-hook 'css-mode-hook #'lsp)
-
   (add-to-list 'auto-mode-alist '("\\.mdx\\'" . markdown-mode))
 
 
@@ -347,12 +329,6 @@
         json-mode
         just-mode
         kotlin-mode
-        lsp-haskell
-        lsp-ivy
-        lsp-mode
-        lsp-tailwindcss
-        lsp-treemacs
-        lsp-ui
         magit
         markdown-mode
         minitest
