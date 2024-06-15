@@ -46,6 +46,7 @@
     ncmpcpp
     pavucontrol
     rtorrent
+    kitty
     silver-searcher
     tmate
     tmux
@@ -60,11 +61,8 @@
   };
 
   programs.home-manager.enable = true;
-
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
-
-
   programs.firefox.enable = true;
 
   services.lorri.enable = true;
@@ -79,12 +77,12 @@
     };
   };
 
-  programs.zsh = {
-    enable = true;
-    oh-my-zsh = {
-      enable = true;
-      plugins = [ "git" "ssh-agent"];
-      theme = "dpoggi";
-    };
-  };
+  # programs.zsh = {
+  #   enable = true;
+  #   oh-my-zsh = {
+  #     enable = true;
+  #     plugins = [ "git" "ssh-agent"];
+  #     theme = "dpoggi";
+  #   };
+  # };
 }
