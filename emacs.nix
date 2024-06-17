@@ -7,7 +7,6 @@
     extraConfig =  ''
   (package-initialize)
   (load-theme 'monokai t)
-
   (global-set-key (kbd "M-<tab>") 'dabbrev-expand)
   (define-key minibuffer-local-map (kbd "M-<tab>") 'dabbrev-expand)
   (setq scroll-margin 0
@@ -62,8 +61,6 @@
   (setq default-input-method "russian-computer")
   (setq semantic-mode t)
 
-
-
   (defun sort-words (reverse beg end)
     "Sort words in region alphabetically, in REVERSE if negative.
     Prefixed with negative \\[universal-argument], sorts in reverse.
@@ -90,7 +87,6 @@
 
   (global-set-key (kbd "C-s") 'swiper)
 
-
   (global-set-key (kbd "M-x") 'counsel-M-x)
   (global-set-key (kbd "C-c C-g") 'counsel-git)
   (global-set-key (kbd "C-c j") 'counsel-git-grep)
@@ -101,7 +97,6 @@
   (global-set-key (kbd "C-x C-r") 'ivy-resume)
 
   (global-flycheck-mode)
-
 
   (defvar projectile-indexing-method)
   (setq projectile-indexing-method 'alien)
@@ -144,21 +139,12 @@
   ;;                                  company-files
   ;;                                  company-dabbrev
   ;;                                  company-elm))
-  (defvar elm-tags-on-save)
-  (setq elm-tags-on-save t)
-  (defvar elm-tags-exclude-elm-stuff)
-  (setq elm-tags-exclude-elm-stuff nil)
-  (defvar tags-revert-without-query)
-  (setq tags-revert-without-query 1)
   (defvar elm-format-command)
   (setq elm-format-command "elm-format")
 
-
-  (global-set-key (kbd "s-o") 'other-window)
-
-  ;; (smartparens-global-mode)
-  ;; (show-smartparens-global-mode t)
-  ;; (diminish 'smartparens-mode)
+  (smartparens-global-mode)
+  (show-smartparens-global-mode t)
+  (diminish 'smartparens-mode)
 
   (outline-minor-mode 1)
 
@@ -224,7 +210,6 @@
 
   (add-to-list 'auto-mode-alist '("\\.mdx\\'" . markdown-mode))
 
-
   (setq backup-directory-alist '((".*" . "~/.trash")))
 
 	(evil-leader/set-key
@@ -284,6 +269,28 @@
   (add-hook 'purescript-mode-hook
    (lambda ()
     (turn-on-purescript-indentation)))
+
+   ;; eglot
+
+   (defun start-rls(_mode)
+     "Start RLS by trying to wrap in nix develop"
+     (cd (projectile-project-root))
+     (cond ((file-exists-p "flake.nix")
+            (progn
+              (message "Running RLS with flake")
+              (list "nix" "develop" "--command" "ruby-lsp")
+              ))
+           ;; ((file-exists-p "shell.nix")
+           ;;  (progn
+           ;;    (message "TODO: handle shell.nix")))
+           (t (progn
+                (message "Running RLS from host")
+                (list "solargraph" "stdio")))
+           ))
+   
+   (with-eval-after-load 'eglot
+     (add-to-list 'eglot-server-programs
+                  '(ruby-mode . start-rls)))
         '';
 
     extraPackages = (epkgs:
