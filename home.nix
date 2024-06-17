@@ -29,6 +29,7 @@
     brightnessctl
     chromium
     crane
+    devenv
     direnv
     dive
     dmenu
