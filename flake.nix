@@ -11,9 +11,10 @@
 
     emacs.url = "github:nix-community/emacs-overlay";
     entangled.url = "github:entangled/entangled";
+    nixpkgs-ruby.url = "github:bobvanderlinden/nixpkgs-ruby";
   };
 
-  outputs = inputs@{nixpkgs, home-manager, ...}:
+  outputs = inputs@{nixpkgs, home-manager, nixpkgs-ruby, ...}:
     let
       system = "x86_64-linux";
       user = "dima.sukhikh";
@@ -24,6 +25,7 @@
         };
         overlays = with inputs; [
           emacs.overlay
+          nixpkgs-ruby.overlays.default
         ];
       };
     in

@@ -49,12 +49,15 @@
     mupdf
     ncdu
     ncmpcpp
+    nodePackages.typescript-language-server
     pamixer
     rtorrent
+    pkgs."ruby-3.3.2"
     silver-searcher
     tmate
     tmux
     vlc
+    volta
     zathura
   ];
 
