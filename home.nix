@@ -29,9 +29,11 @@
     brightnessctl
     chromium
     crane
+    deno
     devenv
     direnv
     dive
+    dhall
     dmenu
     docker-compose
     entr
@@ -53,7 +55,7 @@
     nodePackages.typescript-language-server
     pamixer
     rtorrent
-    pkgs."ruby-3.3.2"
+    # pkgs."ruby-3.3.2"
     silver-searcher
     tmate
     tmux
