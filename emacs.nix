@@ -201,6 +201,7 @@
   "0" 'delete-window
   "o" 'other-window
   "p" 'ace-window
+  "x" 'counsel-M-x
   "a" 'align-regexp)
 
   ;;(evil-set-initial-state 'ibuffer-mode 'normal)
@@ -291,10 +292,13 @@
    (with-eval-after-load 'eglot
      (add-to-list 'eglot-server-programs
                   '(ruby-mode . start-rls)))
+  (evil-collection-init)
+
         '';
 
     extraPackages = (epkgs:
       (with epkgs; [
+        mu4e
         ace-window
         speed-type
         anzu
@@ -374,6 +378,7 @@
         which-key
         yaml-mode
         yasnippet
+        evil-collection
       ]));
   };
 }
