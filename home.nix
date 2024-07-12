@@ -37,6 +37,11 @@
     dmenu
     docker-compose
     entr
+    pkgs.elmPackages.elm
+    pkgs.elmPackages.elm-format
+    pkgs.elmPackages.elm-optimize-level-2
+    pkgs.elmPackages.elm-review
+    pkgs.elmPackages.elm-test
     exercism
     ffmpeg
     fzf
@@ -61,6 +66,8 @@
     tmux
     vlc
     volta
+    termonad
+    watchexec
     zathura
   ];
 

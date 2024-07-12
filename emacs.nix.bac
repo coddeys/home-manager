@@ -1,12 +1,12 @@
-{ config, pkgs, ... }:
+{config, pkgs, callPackage, ... }:
 {
+
   programs.emacs = {
     enable = true;
-    # package = pkgs.emacs-unstable;
-    package = pkgs.emacs;
     extraConfig =  ''
   (package-initialize)
   (load-theme 'monokai t)
+
   (global-set-key (kbd "M-<tab>") 'dabbrev-expand)
   (define-key minibuffer-local-map (kbd "M-<tab>") 'dabbrev-expand)
   (setq scroll-margin 0
@@ -61,6 +61,8 @@
   (setq default-input-method "russian-computer")
   (setq semantic-mode t)
 
+
+
   (defun sort-words (reverse beg end)
     "Sort words in region alphabetically, in REVERSE if negative.
     Prefixed with negative \\[universal-argument], sorts in reverse.
@@ -87,6 +89,7 @@
 
   (global-set-key (kbd "C-s") 'swiper)
 
+
   (global-set-key (kbd "M-x") 'counsel-M-x)
   (global-set-key (kbd "C-c C-g") 'counsel-git)
   (global-set-key (kbd "C-c j") 'counsel-git-grep)
@@ -97,6 +100,7 @@
   (global-set-key (kbd "C-x C-r") 'ivy-resume)
 
   (global-flycheck-mode)
+
 
   (defvar projectile-indexing-method)
   (setq projectile-indexing-method 'alien)
@@ -139,10 +143,21 @@
   ;;                                  company-files
   ;;                                  company-dabbrev
   ;;                                  company-elm))
+  (defvar elm-tags-on-save)
+  (setq elm-tags-on-save t)
+  (defvar elm-tags-exclude-elm-stuff)
+  (setq elm-tags-exclude-elm-stuff nil)
+  (defvar tags-revert-without-query)
+  (setq tags-revert-without-query 1)
   (defvar elm-format-command)
   (setq elm-format-command "elm-format")
 
-  (diminish 'smartparens-mode)
+
+  (global-set-key (kbd "s-o") 'other-window)
+
+  ;; (smartparens-global-mode)
+  ;; (show-smartparens-global-mode t)
+  ;; (diminish 'smartparens-mode)
 
   (outline-minor-mode 1)
 
@@ -199,7 +214,6 @@
   "0" 'delete-window
   "o" 'other-window
   "p" 'ace-window
-  "x" 'counsel-M-x
   "a" 'align-regexp)
 
   ;;(evil-set-initial-state 'ibuffer-mode 'normal)
@@ -207,7 +221,26 @@
 
   (which-key-mode)
 
+  ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
+  (setq lsp-keymap-prefix "C-l")
+  (add-hook 'typescript-mode-hook #'lsp)
+  (add-hook 'ruby-mode-hook #'lsp)
+  (add-hook 'js2-mode-hook #'lsp)
+  (add-hook 'vue-mode-hook #'lsp)
+  (add-hook 'js-mode-hook #'lsp)
+  (add-hook 'elm-mode-hook #'lsp)
+  (add-hook 'haskell-mode-hook #'lsp)
+  (add-hook 'purescript-mode-hook #'lsp)
+  (add-hook 'yaml-mode-hook #'lsp)
+  (add-hook 'terraform-mode-hook #'lsp)
+  (add-hook 'markdown-mode-hook #'lsp)
+  (add-hook 'tex-mode-hook #'lsp)
+  (add-hook 'latex-mode-hook #'lsp)
+  (add-hook 'scss-mode-hook #'lsp)
+  (add-hook 'css-mode-hook #'lsp)
+
   (add-to-list 'auto-mode-alist '("\\.mdx\\'" . markdown-mode))
+
 
   (setq backup-directory-alist '((".*" . "~/.trash")))
 
@@ -268,35 +301,10 @@
   (add-hook 'purescript-mode-hook
    (lambda ()
     (turn-on-purescript-indentation)))
-
-   ;; eglot
-
-   (defun start-rls(_mode)
-     "Start RLS by trying to wrap in nix develop"
-     (cd (projectile-project-root))
-     (cond ((file-exists-p "flake.nix")
-            (progn
-              (message "Running RLS with flake")
-              (list "nix" "develop" "--command" "ruby-lsp")
-              ))
-           ;; ((file-exists-p "shell.nix")
-           ;;  (progn
-           ;;    (message "TODO: handle shell.nix")))
-           (t (progn
-                (message "Running RLS from host")
-                (list "solargraph" "stdio")))
-           ))
-   
-   (with-eval-after-load 'eglot
-     (add-to-list 'eglot-server-programs
-                  '(ruby-mode . start-rls)))
-  (evil-collection-init)
-
         '';
 
     extraPackages = (epkgs:
       (with epkgs; [
-        mu4e
         ace-window
         speed-type
         anzu
@@ -337,8 +345,13 @@
         js2-mode
         json-mode
         just-mode
-        justl
         kotlin-mode
+        lsp-haskell
+        lsp-ivy
+        lsp-mode
+        lsp-tailwindcss
+        lsp-treemacs
+        lsp-ui
         magit
         markdown-mode
         minitest
@@ -377,7 +390,6 @@
         which-key
         yaml-mode
         yasnippet
-        evil-collection
       ]));
   };
 }
