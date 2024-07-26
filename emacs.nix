@@ -26,7 +26,20 @@
   ;; Newline at end of file
   (setq require-final-newline t)
   (global-so-long-mode 1)
+  (global-auto-revert-mode t)
+  (global-subword-mode t)
+  (setq-default fill-column 80)
 
+  ;; don't kill emacs
+  (defun dont-kill-emacs ()
+    (interactive)
+    (error (substitute-command-keys "To exit emacs: \\[kill-emacs]")))
+  (global-set-key "\C-x\C-c" 'dont-kill-emacs)
+
+  (display-time-mode 1)
+  (setq column-number-mode t)
+  (setq default-input-method "russian-computer")
+  (setq semantic-mode t)
 
   ;; hippie expand is dabbrev expand on steroids
   (yas-global-mode 1)
@@ -43,23 +56,6 @@
                                            try-complete-lisp-symbol))
   ;; use hippie-expand instead of dabbrev
   (global-set-key (kbd "M-/") #'hippie-expand)
-
-
-  (global-auto-revert-mode t)
-  (global-subword-mode t)
-
-  (setq-default fill-column 80)
-
-  ;; don't kill emacs
-  (defun dont-kill-emacs ()
-    (interactive)
-    (error (substitute-command-keys "To exit emacs: \\[kill-emacs]")))
-  (global-set-key "\C-x\C-c" 'dont-kill-emacs)
-
-  (display-time-mode 1)
-  (setq column-number-mode t)
-  (setq default-input-method "russian-computer")
-  (setq semantic-mode t)
 
   (defun sort-words (reverse beg end)
     "Sort words in region alphabetically, in REVERSE if negative.
