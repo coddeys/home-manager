@@ -62,9 +62,22 @@
   "a" 'align-regexp)
 
   (which-key-mode)
+  (add-hook 'after-init-hook 'global-company-mode)
 
   ;; TYPESCRIPT
   (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-ts-mode))
+  (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
+
+  ;; (cl-defmethod project-root ((project (head eglot-project)))
+  ;;   (cdr project))
+  ;; 
+  ;; (defun my-project-try-tsconfig-json (dir)
+  ;;   (when-let* ((found (locate-dominating-file dir "tsconfig.json")))
+  ;;     (cons 'eglot-project found)))
+  ;; 
+  ;; (add-hook 'project-find-functions
+  ;;           'my-project-try-tsconfig-json nil nil)
+  
         '';
 
     extraPackages = (epkgs:
@@ -75,6 +88,7 @@
         diminish
         monokai-theme
         which-key
+        company
         treesit-grammars.with-all-grammars
       ]));
   };
