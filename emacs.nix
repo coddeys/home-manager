@@ -366,6 +366,7 @@
         slim-mode
         smartparens
         solidity-mode
+        speed-type
         swiper
         terraform-mode
         typescript-mode
