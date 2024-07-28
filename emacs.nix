@@ -63,6 +63,7 @@
 
   (which-key-mode)
   (add-hook 'after-init-hook 'global-company-mode)
+  (yas-global-mode 1)
 
   ;; TYPESCRIPT
   (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-ts-mode))
@@ -90,6 +91,7 @@
         which-key
         company
         treesit-grammars.with-all-grammars
+        yasnippet
       ]));
   };
 }
