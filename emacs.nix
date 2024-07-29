@@ -69,6 +69,8 @@
   ;; TYPESCRIPT
   (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-ts-mode))
   (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
+  (add-to-list 'auto-mode-alist '("\\.json\\'" . typescript-ts-mode))
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . typescript-ts-mode))
  
   ;; (cl-defmethod project-root ((project (head eglot-project)))
   ;;   (cdr project))
@@ -85,6 +87,25 @@
 
   (setq magit-refresh-status-buffer nil)
   (global-set-key (kbd "C-c g") 'magit-status)
+
+
+  (ivy-mode 1)
+  (defvar ivy-use-virtual-buffers)
+  (setq ivy-use-virtual-buffers t)
+  (defvar ivy-count-format)
+  (setq ivy-count-format "(%d/%d) ")
+  (diminish 'ivy-mode)
+
+  (global-set-key (kbd "C-s") 'swiper)
+
+  (global-set-key (kbd "M-x") 'counsel-M-x)
+  (global-set-key (kbd "C-c C-g") 'counsel-git)
+  (global-set-key (kbd "C-c j") 'counsel-git-grep)
+  (global-set-key (kbd "C-c k") 'counsel-ag)
+  (global-set-key (kbd "C-x l") 'counsel-locate)
+  (global-set-key  (kbd "C-c z") 'counsel-fzf )
+  (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+  (global-set-key (kbd "C-x C-r") 'ivy-resume)
         '';
 
     extraPackages = (epkgs:
@@ -96,6 +117,10 @@
         diminish
         magit
         monokai-theme
+        swiper
+        counsel
+        ivy
+        ivy-hydra
         which-key
         company
         treesit-grammars.with-all-grammars
