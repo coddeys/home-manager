@@ -68,7 +68,7 @@
   ;; TYPESCRIPT
   (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-ts-mode))
   (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
-
+ 
   ;; (cl-defmethod project-root ((project (head eglot-project)))
   ;;   (cdr project))
   ;; 
@@ -79,10 +79,14 @@
   ;; (add-hook 'project-find-functions
   ;;           'my-project-try-tsconfig-json nil nil)
   
+  (diminish 'apheleia-mode)
+  (apheleia-global-mode +1)
+
         '';
 
     extraPackages = (epkgs:
       (with epkgs; [
+        apheleia
         evil
         evil-collection
         evil-leader
@@ -92,6 +96,7 @@
         company
         treesit-grammars.with-all-grammars
         yasnippet
+        vterm
       ]));
   };
 }

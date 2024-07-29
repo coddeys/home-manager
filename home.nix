@@ -42,6 +42,7 @@
     pkgs.elmPackages.elm-optimize-level-2
     pkgs.elmPackages.elm-review
     pkgs.elmPackages.elm-test
+    elmPackages.elm-language-server
     exercism
     ffmpeg
     fzf
@@ -58,6 +59,7 @@
     ncdu
     ncmpcpp
     nodePackages.typescript-language-server
+    nodePackages.prettier
     pamixer
     rtorrent
     # pkgs."ruby-3.3.2"
