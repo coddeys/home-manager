@@ -37,11 +37,11 @@
     dmenu
     docker-compose
     entr
-    pkgs.elmPackages.elm
-    pkgs.elmPackages.elm-format
-    pkgs.elmPackages.elm-optimize-level-2
-    pkgs.elmPackages.elm-review
-    pkgs.elmPackages.elm-test
+    elmPackages.elm
+    elmPackages.elm-format
+    elmPackages.elm-optimize-level-2
+    elmPackages.elm-review
+    elmPackages.elm-test
     elmPackages.elm-language-server
     exercism
     ffmpeg
