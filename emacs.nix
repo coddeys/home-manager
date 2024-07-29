@@ -59,7 +59,8 @@
   "o" 'other-window
   "p" 'ace-window
   "x" 'counsel-M-x
-  "a" 'align-regexp)
+  "a" 'align-regexp
+  "g" 'magit-status)
 
   (which-key-mode)
   (add-hook 'after-init-hook 'global-company-mode)
@@ -82,7 +83,9 @@
   (diminish 'apheleia-mode)
   (apheleia-global-mode +1)
 
-        '';
+  (setq magit-refresh-status-buffer nil)
+  (global-set-key (kbd "C-c g") 'magit-status)
+        ''
 
     extraPackages = (epkgs:
       (with epkgs; [
@@ -91,6 +94,7 @@
         evil-collection
         evil-leader
         diminish
+        magit
         monokai-theme
         which-key
         company
