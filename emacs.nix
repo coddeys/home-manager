@@ -72,22 +72,13 @@
   (add-to-list 'auto-mode-alist '("\\.json\\'" . typescript-ts-mode))
   (add-to-list 'auto-mode-alist '("\\.js\\'" . typescript-ts-mode))
  
-  ;; (cl-defmethod project-root ((project (head eglot-project)))
-  ;;   (cdr project))
-  ;; 
-  ;; (defun my-project-try-tsconfig-json (dir)
-  ;;   (when-let* ((found (locate-dominating-file dir "tsconfig.json")))
-  ;;     (cons 'eglot-project found)))
-  ;; 
-  ;; (add-hook 'project-find-functions
-  ;;           'my-project-try-tsconfig-json nil nil)
   
   (diminish 'apheleia-mode)
   (apheleia-global-mode +1)
 
   (setq magit-refresh-status-buffer nil)
   (global-set-key (kbd "C-c g") 'magit-status)
-
+  (global-diff-hl-mode)
 
   (ivy-mode 1)
   (defvar ivy-use-virtual-buffers)
@@ -97,7 +88,6 @@
   (diminish 'ivy-mode)
 
   (global-set-key (kbd "C-s") 'swiper)
-
   (global-set-key (kbd "M-x") 'counsel-M-x)
   (global-set-key (kbd "C-c C-g") 'counsel-git)
   (global-set-key (kbd "C-c j") 'counsel-git-grep)
@@ -106,17 +96,47 @@
   (global-set-key  (kbd "C-c z") 'counsel-fzf )
   (global-set-key (kbd "C-x C-f") 'counsel-find-file)
   (global-set-key (kbd "C-x C-r") 'ivy-resume)
+
+  ;; Elm
+  (defvar elm-format-on-save)
+  (setq elm-format-on-save 0)
+  (add-hook 'elm-mode-hook 'elm-indent-mode)
+  (add-hook 'elm-mode-hook 'my/elm-outline-mode)
+  (defvar elm-format-command)
+  (setq elm-format-command "elm-format")
+
+  ;; jumping to visible text using a char-based decision tree
+  (global-set-key (kbd "C-:") 'avy-goto-char)
+  (global-set-key (kbd "C-'") 'avy-goto-char-2)
+  (global-set-key (kbd "C-;") 'avy-goto-line)
+
+  (avy-setup-default)
+  (global-set-key (kbd "C-c C-j") 'avy-resume)
+
+  (global-set-key (kbd "C-c %") 'anzu-query-replace)
+  (global-anzu-mode +1)
+
+  (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+  (global-set-key (kbd "C->") 'mc/mark-next-like-this)
+  (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+  (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+
         '';
 
     extraPackages = (epkgs:
       (with epkgs; [
         apheleia
+        ace-window
+        anzu
+        avy
         evil
         evil-collection
         evil-leader
+        diff-hl
         diminish
         magit
         monokai-theme
+        multiple-cursors
         swiper
         counsel
         ivy
@@ -126,6 +146,9 @@
         treesit-grammars.with-all-grammars
         yasnippet
         vterm
+        elm-mode
+        dhall-mode
+        nix-mode
       ]));
   };
 }
