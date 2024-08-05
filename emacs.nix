@@ -121,6 +121,12 @@
   (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
   (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
+  ;; Visually highlight the selected buffer.
+  (dimmer-configure-ivy)
+  (dimmer-configure-which-key)
+  (dimmer-configure-magit)
+  (dimmer-mode t)
+
         '';
 
     extraPackages = (epkgs:
@@ -134,6 +140,7 @@
         evil-leader
         diff-hl
         diminish
+        dimmer
         magit
         monokai-theme
         multiple-cursors
