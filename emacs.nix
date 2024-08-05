@@ -51,6 +51,7 @@
   (evil-leader/set-key
   "f" 'find-file
   "b" 'switch-to-buffer
+  "d" 'docker
   "k" 'kill-buffer
   "s" 'save-buffer
   "2" 'split-window-below
@@ -122,40 +123,60 @@
   (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
   ;; Visually highlight the selected buffer.
-  (dimmer-configure-ivy)
+  (dimmer-configure-hydra)
   (dimmer-configure-which-key)
   (dimmer-configure-magit)
   (dimmer-mode t)
 
+  (editorconfig-mode 1)
+
+  (global-undo-tree-mode)
+  (evil-set-undo-system 'undo-tree)
         '';
 
     extraPackages = (epkgs:
       (with epkgs; [
-        apheleia
         ace-window
         anzu
+        apheleia
         avy
-        evil
-        evil-collection
-        evil-leader
+        company
+        counsel
         diff-hl
         diminish
         dimmer
-        magit
-        monokai-theme
-        multiple-cursors
-        swiper
-        counsel
+        docker
+        dockerfile-mode
+        editorconfig
+        evil
+        evil-collection
+        evil-leader
+        hydra
         ivy
         ivy-hydra
-        which-key
-        company
+        magit
+        monokai-theme
+        multi-vterm
+        multiple-cursors
+        restclient
+        scratch
+        speed-type
+        swiper
         treesit-grammars.with-all-grammars
-        yasnippet
+        undo-tree
         vterm
+        wgrep
+        which-key
+        yasnippet
         elm-mode
         dhall-mode
         nix-mode
+        graphql-mode
+        haml-mode
+        haskell-mode
+        purescript-mode
+        markdown-mode
+        justl
       ]));
   };
 }
