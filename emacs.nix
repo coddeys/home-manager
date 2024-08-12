@@ -9,6 +9,7 @@
   (load-theme 'monokai t)
   (global-set-key (kbd "M-<tab>") 'dabbrev-expand)
   (define-key minibuffer-local-map (kbd "M-<tab>") 'dabbrev-expand)
+  (inhibit-startup-screen t)
   (setq scroll-margin 0
       scroll-conservatively 100000
       scroll-preserve-screen-position 1)
@@ -51,7 +52,7 @@
   (evil-leader/set-key
   "f" 'find-file
   "b" 'switch-to-buffer
-  "d" 'docker
+  "d" 'docker 
   "k" 'kill-buffer
   "s" 'save-buffer
   "2" 'split-window-below
@@ -136,38 +137,37 @@
 
     extraPackages = (epkgs:
       (with epkgs; [
+        apheleia
         ace-window
         anzu
-        apheleia
         avy
-        company
-        counsel
+        editorconfig
+        evil
+        evil-collection
+        evil-leader
         diff-hl
         diminish
         dimmer
         docker
         dockerfile-mode
-        editorconfig
-        evil
-        evil-collection
-        evil-leader
+        magit
+        monokai-theme
+        multiple-cursors
+        multi-vterm
+        restclient
+        scratch
+        swiper
+        speed-type
+        counsel
         hydra
         ivy
         ivy-hydra
-        magit
-        monokai-theme
-        multi-vterm
-        multiple-cursors
-        restclient
-        scratch
-        speed-type
-        swiper
+        which-key
+        company
         treesit-grammars.with-all-grammars
+        yasnippet
         undo-tree
         vterm
-        wgrep
-        which-key
-        yasnippet
         elm-mode
         dhall-mode
         nix-mode
