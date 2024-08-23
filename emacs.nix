@@ -143,6 +143,10 @@
       (define-key xah-fly-leader-key-map (kbd "SPC") 'nil)
       (define-key xah-fly-leader-key-map (kbd "SPC SPC") 'xah-fly-insert-mode-activate)
       (define-key xah-fly-leader-key-map (kbd "SPC t") 'hippie-expand)
+      (define-key xah-fly-leader-key-map (kbd "SPC g j") 'avy-goto-char-timer)
+      (define-key xah-fly-leader-key-map (kbd "SPC g k") 'avy-goto-line)
+      (define-key xah-fly-leader-key-map (kbd "SPC g l") 'avy-resume)
+      (define-key xah-fly-leader-key-map (kbd "SPC g ;") 'avy-goto-char-2)
 
       ;; Dired
       (setq dired-dwim-target t)
