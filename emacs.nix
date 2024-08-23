@@ -137,8 +137,21 @@
       (add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-ts-mode))
 
       (require 'xah-fly-keys)
-      (xah-fly-keys-set-layout "qwerty") ; обязательно
+      (xah-fly-keys-set-layout "qwerty")
       (xah-fly-keys 1)
+      ;; put this AFTER loading Xah Fly Keys
+      (define-key xah-fly-leader-key-map (kbd "SPC") 'nil)
+      (define-key xah-fly-leader-key-map (kbd "SPC SPC") 'xah-fly-insert-mode-activate)
+      (define-key xah-fly-leader-key-map (kbd "SPC t") 'hippie-expand)
+
+      ;; Dired
+      (setq dired-dwim-target t)
+      (setq dired-listing-switches "-alh")
+      (defun my-dired-init ()
+        "to be run as hook for `dired-mode'."
+        (dired-hide-details-mode 1))
+
+      (add-hook 'dired-mode-hook 'my-dired-init)
 
     '';
 

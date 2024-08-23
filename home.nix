@@ -58,6 +58,7 @@
     mupdf
     ncdu
     ncmpcpp
+    nixd
     nodePackages.typescript-language-server
     nodePackages.prettier
     pamixer
