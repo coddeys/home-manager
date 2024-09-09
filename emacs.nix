@@ -200,6 +200,7 @@
         haskell-mode
         purescript-mode
         markdown-mode
+        just-mode
         justl
       ]));
   };

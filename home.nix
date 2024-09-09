@@ -60,6 +60,7 @@
     ncmpcpp
     nixd
     nodePackages.typescript-language-server
+    nodePackages.yaml-language-server
     nodePackages.prettier
     pamixer
     rtorrent
