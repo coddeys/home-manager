@@ -157,6 +157,8 @@
 
       (add-hook 'dired-mode-hook 'my-dired-init)
 
+      (add-to-list 'eglot-server-programs '(ruby-mode . ("bundle" "exec" "rubocop" "--lsp")))
+      (add-hook 'ruby-mode-hook 'eglot-ensure)
     '';
 
     extraPackages = (epkgs:
