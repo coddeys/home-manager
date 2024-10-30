@@ -148,6 +148,21 @@
       (define-key xah-fly-leader-key-map (kbd "SPC g l") 'avy-resume)
       (define-key xah-fly-leader-key-map (kbd "SPC g ;") 'avy-goto-char-2)
 
+      (define-key xah-fly-leader-key-map (kbd "SPC p f") 'project-find-file)
+      (define-key xah-fly-leader-key-map (kbd "SPC p g") 'project-find-regexp)
+      (define-key xah-fly-leader-key-map (kbd "SPC p b") 'project-switch-to-buffer)
+      (define-key xah-fly-leader-key-map (kbd "SPC p d") 'project-dired)
+      (define-key xah-fly-leader-key-map (kbd "SPC p k") 'project-kill-buffers)
+      (define-key xah-fly-leader-key-map (kbd "SPC p r") 'project-query-replace-regexp)
+      (define-key xah-fly-leader-key-map (kbd "SPC p v") 'project-vc-dir)
+      (define-key xah-fly-leader-key-map (kbd "SPC p s") 'project-shell)
+      (define-key xah-fly-leader-key-map (kbd "SPC p !") 'project-shell-command)
+      (define-key xah-fly-leader-key-map (kbd "SPC p &") 'project-async-shell-command)
+
+      (define-key xah-fly-leader-key-map (kbd "SPC p p") 'project-switch-project)
+      (define-key xah-fly-leader-key-map (kbd "SPC p s") 'project-shell)
+      (define-key xah-fly-leader-key-map (kbd "SPC p s") 'project-shell)
+
       ;; Dired
       (setq dired-dwim-target t)
       (setq dired-listing-switches "-alh")
@@ -167,9 +182,6 @@
         avy
         editorconfig
         xah-fly-keys
-        # evil
-        # evil-collection
-        # evil-leader
         diff-hl
         diminish
         dimmer
@@ -203,6 +215,7 @@
         slim-mode
         just-mode
         justl
+        terraform-mode
       ]));
   };
 }

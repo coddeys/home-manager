@@ -12,9 +12,10 @@
     emacs.url = "github:nix-community/emacs-overlay";
     entangled.url = "github:entangled/entangled";
     nixpkgs-ruby.url = "github:bobvanderlinden/nixpkgs-ruby";
+    purescript-overlay.url = "github:thomashoneyman/purescript-overlay";
   };
 
-  outputs = inputs@{nixpkgs, home-manager, nixpkgs-ruby, ...}:
+  outputs = inputs@{nixpkgs, home-manager, nixpkgs-ruby, purescript-overlay, ...}:
     let
       system = "x86_64-linux";
       user = "dima.sukhikh";
@@ -26,6 +27,7 @@
         overlays = with inputs; [
           emacs.overlay
           nixpkgs-ruby.overlays.default
+          purescript-overlay.overlays.default
         ];
       };
     in
