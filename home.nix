@@ -1,6 +1,13 @@
 { config, pkgs, inputs, ... }:
-
+let
+  tex = (pkgs.texlive.combine {
+    inherit (pkgs.texlive) scheme-full
+      dvisvgm dvipng # for preview and export as html
+      wrapfig amsmath ulem hyperref capt-of;
+  });
+in
 {
+
   nixpkgs = {
     config = {
       allowUnfree = true;
@@ -69,10 +76,15 @@
     tmate
     tmux
     vlc
-    volta
     termonad
     watchexec
     zathura
+    skopeo
+    w3m
+    # betterlockscreen
+    # rofi
+    # dbeaver-bin
+    tex
   ];
 
   home.file = {

@@ -75,6 +75,9 @@
       (add-to-list 'auto-mode-alist '("\\.json\\'" . json-ts-mode))
       (add-to-list 'auto-mode-alist '("\\.js\\'" . typescript-ts-mode))
 
+      ;; Rust
+      (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-ts-mode))
+
 
       (diminish 'apheleia-mode)
       (apheleia-global-mode +1)
@@ -137,46 +140,40 @@
       (add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-ts-mode))
 
       (require 'xah-fly-keys)
-      (xah-fly-keys-set-layout "qwerty")
+      (xah-fly-keys-set-layout "colemak-dh")
       (xah-fly-keys 1)
+      (define-key key-translation-map (kbd "C-t") (kbd "C-g"))
+
       ;; put this AFTER loading Xah Fly Keys
+
+
       (define-key xah-fly-leader-key-map (kbd "SPC") 'nil)
       (define-key xah-fly-leader-key-map (kbd "RET") 'nil)
       (define-key xah-fly-leader-key-map (kbd "SPC RET") 'execute-extended-command)
       (define-key xah-fly-leader-key-map (kbd "RET SPC") 'execute-extended-command)
       (define-key xah-fly-leader-key-map (kbd "SPC SPC") 'xah-fly-insert-mode-activate)
-      (define-key xah-fly-leader-key-map (kbd "RET j") 'avy-goto-char-timer)
-      (define-key xah-fly-leader-key-map (kbd "SPC k") 'avy-goto-line)
-      (define-key xah-fly-leader-key-map (kbd "SPC l") 'avy-resume)
-      (define-key xah-fly-leader-key-map (kbd "SPC ;") 'avy-goto-char-2)
-      (define-key xah-fly-leader-key-map (kbd "RET f") 'project-find-file)
+
+      (define-key xah-fly-leader-key-map (kbd "RET n") 'avy-goto-char-timer)
+      (define-key xah-fly-leader-key-map (kbd "RET m") 'avy-goto-char-2)
+      (define-key xah-fly-leader-key-map (kbd "RET k") 'avy-goto-line)
+      (define-key xah-fly-leader-key-map (kbd "RET l") 'avy-resume)
+
+      (define-key xah-fly-leader-key-map (kbd "RET s") 'project-find-file)
       (define-key xah-fly-leader-key-map (kbd "RET g") 'project-find-regexp)
 
-      (define-key xah-fly-leader-key-map (kbd "RET p b") 'project-switch-to-buffer)
-      (define-key xah-fly-leader-key-map (kbd "RET p d") 'project-dired)
-      (define-key xah-fly-leader-key-map (kbd "RET p k") 'project-kill-buffers)
-      (define-key xah-fly-leader-key-map (kbd "RET p r") 'project-query-replace-regexp)
-      (define-key xah-fly-leader-key-map (kbd "RET p v") 'project-vc-dir)
-      (define-key xah-fly-leader-key-map (kbd "RET p s") 'project-shell)
-      (define-key xah-fly-leader-key-map (kbd "RET p !") 'project-shell-command)
-      (define-key xah-fly-leader-key-map (kbd "RET p &") 'project-async-shell-command)
-      (define-key xah-fly-leader-key-map (kbd "RET p p") 'project-switch-project)
-      (define-key xah-fly-leader-key-map (kbd "RET p s") 'project-shell)
+      (define-key xah-fly-leader-key-map (kbd "RET t t") 'project-switch-to-buffer)
+      (define-key xah-fly-leader-key-map (kbd "RET t r") 'project-switch-project)
+      (define-key xah-fly-leader-key-map (kbd "RET t d") 'project-dired)
+      (define-key xah-fly-leader-key-map (kbd "RET t k") 'project-kill-buffers)
+      (define-key xah-fly-leader-key-map (kbd "RET t g") 'project-query-replace-regexp)
+      (define-key xah-fly-leader-key-map (kbd "RET t v") 'project-vc-dir)
+      (define-key xah-fly-leader-key-map (kbd "RET t s") 'project-shell)
+      (define-key xah-fly-leader-key-map (kbd "RET t !") 'project-shell-command)
+      (define-key xah-fly-leader-key-map (kbd "RET t &") 'project-async-shell-command)
+      (define-key xah-fly-leader-key-map (kbd "RET t s") 'project-shell)
 
-      (define-key xah-fly-leader-key-map (kbd "SPC j") 'avy-goto-char-timer)
-      (define-key xah-fly-leader-key-map (kbd "SPC f") 'project-find-file)
-      (define-key xah-fly-leader-key-map (kbd "SPC g") 'project-find-regexp)
 
-      (define-key xah-fly-leader-key-map (kbd "SPC p b") 'project-switch-to-buffer)
-      (define-key xah-fly-leader-key-map (kbd "SPC p d") 'project-dired)
-      (define-key xah-fly-leader-key-map (kbd "SPC p k") 'project-kill-buffers)
-      (define-key xah-fly-leader-key-map (kbd "SPC p r") 'project-query-replace-regexp)
-      (define-key xah-fly-leader-key-map (kbd "SPC p v") 'project-vc-dir)
-      (define-key xah-fly-leader-key-map (kbd "SPC p s") 'project-shell)
-      (define-key xah-fly-leader-key-map (kbd "SPC p !") 'project-shell-command)
-      (define-key xah-fly-leader-key-map (kbd "SPC p &") 'project-async-shell-command)
-      (define-key xah-fly-leader-key-map (kbd "SPC p p") 'project-switch-project)
-      (define-key xah-fly-leader-key-map (kbd "SPC p s") 'project-shell)
+      (require 'project) 
 
 
       ;; Dired
@@ -187,6 +184,10 @@
         (dired-hide-details-mode 1))
 
       (add-hook 'dired-mode-hook 'my-dired-init)
+
+      ;; latex
+      (setq org-latex-compiler "lualatex")
+      (setq org-preview-latex-default-process 'dvisvgm)
 
     '';
 
@@ -232,6 +233,7 @@
         just-mode
         justl
         terraform-mode
+        rust-mode
       ]));
   };
 }
