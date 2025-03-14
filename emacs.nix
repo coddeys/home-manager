@@ -146,34 +146,35 @@
 
       ;; put this AFTER loading Xah Fly Keys
 
-
       (define-key xah-fly-leader-key-map (kbd "SPC") 'nil)
       (define-key xah-fly-leader-key-map (kbd "RET") 'nil)
-      (define-key xah-fly-leader-key-map (kbd "SPC RET") 'execute-extended-command)
       (define-key xah-fly-leader-key-map (kbd "RET SPC") 'execute-extended-command)
       (define-key xah-fly-leader-key-map (kbd "SPC SPC") 'xah-fly-insert-mode-activate)
+      (define-key xah-fly-leader-key-map (kbd "SPC e") 'avy-goto-line)
+      (define-key xah-fly-leader-key-map (kbd "SPC o") 'avy-goto-char-2)
+
+      (define-key xah-fly-leader-key-map (kbd "RET .") 'mc/mark-next-like-this)
+      (define-key xah-fly-leader-key-map (kbd "RET ,") 'mc/mark-previous-like-this)
+      (define-key xah-fly-leader-key-map (kbd "RET /") 'mc/mark-all-like-this)
+      (define-key xah-fly-leader-key-map (kbd "RET ?") 'mc/edit-lines)
 
       (define-key xah-fly-leader-key-map (kbd "RET n") 'avy-goto-char-timer)
-      (define-key xah-fly-leader-key-map (kbd "RET m") 'avy-goto-char-2)
-      (define-key xah-fly-leader-key-map (kbd "RET k") 'avy-goto-line)
-      (define-key xah-fly-leader-key-map (kbd "RET l") 'avy-resume)
-
       (define-key xah-fly-leader-key-map (kbd "RET s") 'project-find-file)
       (define-key xah-fly-leader-key-map (kbd "RET g") 'project-find-regexp)
-
-      (define-key xah-fly-leader-key-map (kbd "RET t t") 'project-switch-to-buffer)
-      (define-key xah-fly-leader-key-map (kbd "RET t r") 'project-switch-project)
+      (define-key xah-fly-leader-key-map (kbd "RET t b") 'project-switch-to-buffer)
       (define-key xah-fly-leader-key-map (kbd "RET t d") 'project-dired)
       (define-key xah-fly-leader-key-map (kbd "RET t k") 'project-kill-buffers)
-      (define-key xah-fly-leader-key-map (kbd "RET t g") 'project-query-replace-regexp)
+      (define-key xah-fly-leader-key-map (kbd "RET t r") 'project-query-replace-regexp)
       (define-key xah-fly-leader-key-map (kbd "RET t v") 'project-vc-dir)
       (define-key xah-fly-leader-key-map (kbd "RET t s") 'project-shell)
       (define-key xah-fly-leader-key-map (kbd "RET t !") 'project-shell-command)
       (define-key xah-fly-leader-key-map (kbd "RET t &") 'project-async-shell-command)
+      (define-key xah-fly-leader-key-map (kbd "RET t p") 'project-switch-project)
       (define-key xah-fly-leader-key-map (kbd "RET t s") 'project-shell)
 
-
-      (require 'project) 
+      (define-key xah-fly-leader-key-map (kbd "SPC RET") 'execute-extended-command)
+      (define-key xah-fly-leader-key-map (kbd "SPC l") 'move-to-window-line-top-bottom)
+      (define-key xah-fly-leader-key-map (kbd "RET l") 'move-to-window-line-top-bottom)
 
 
       ;; Dired
