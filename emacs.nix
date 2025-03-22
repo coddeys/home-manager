@@ -161,7 +161,7 @@
       (define-key xah-fly-leader-key-map (kbd "RET n") 'avy-goto-char-timer)
       (define-key xah-fly-leader-key-map (kbd "RET s") 'project-find-file)
       (define-key xah-fly-leader-key-map (kbd "RET g") 'project-find-regexp)
-      (define-key xah-fly-leader-key-map (kbd "RET t b") 'project-switch-to-buffer)
+      (define-key xah-fly-leader-key-map (kbd "RET t t") 'project-switch-to-buffer)
       (define-key xah-fly-leader-key-map (kbd "RET t d") 'project-dired)
       (define-key xah-fly-leader-key-map (kbd "RET t k") 'project-kill-buffers)
       (define-key xah-fly-leader-key-map (kbd "RET t r") 'project-query-replace-regexp)
@@ -173,8 +173,8 @@
       (define-key xah-fly-leader-key-map (kbd "RET t s") 'project-shell)
 
       (define-key xah-fly-leader-key-map (kbd "SPC RET") 'execute-extended-command)
-      (define-key xah-fly-leader-key-map (kbd "SPC l") 'move-to-window-line-top-bottom)
-      (define-key xah-fly-leader-key-map (kbd "RET l") 'move-to-window-line-top-bottom)
+      (define-key xah-fly-leader-key-map (kbd "SPC n") 'move-to-window-line-top-bottom)
+      (define-key xah-fly-leader-key-map (kbd "RET n") 'move-to-window-line-top-bottom)
 
 
       ;; Dired
