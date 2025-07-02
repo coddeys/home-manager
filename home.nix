@@ -30,6 +30,7 @@ in
   services.emacs.enable = true;
 
   home.packages = with pkgs; [
+    helix
     bat
     bottom
     brave
@@ -41,6 +42,8 @@ in
     direnv
     dive
     dhall
+    dhall-yaml
+    dhall-json
     dmenu
     docker-compose
     entr
@@ -85,6 +88,9 @@ in
     # rofi
     # dbeaver-bin
     tex
+    flameshot
+    act
+    hadolint
   ];
 
   home.file = {

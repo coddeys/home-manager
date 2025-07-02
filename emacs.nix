@@ -7,8 +7,8 @@
     extraConfig = ''
       (package-initialize)
       (setq ring-bell-function 'ignore)
-      (load-theme 'monokai t)
-      (setq inhibit-startup-screen t)
+      (load-theme 'doom-palenight t)
+      ;; (load-theme 'monokai t)
       (global-set-key (kbd "M-<tab>") 'dabbrev-expand)
       (define-key minibuffer-local-map (kbd "M-<tab>") 'dabbrev-expand)
       (setq scroll-margin 0
@@ -41,30 +41,6 @@
 
       (diminish 'subword-mode)
 
-      ;;EVIL-MODE
-      ;; (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
-      ;; (setq evil-want-keybinding nil)
-      ;; (evil-mode 1)
-      ;; (when (require 'evil-collection nil t)
-        ;; (evil-collection-init))
-      ;; (setq evil-search-module 'evil-search)
-      ;; (global-evil-leader-mode)
-      ;; (evil-leader/set-leader "<SPC>")
-      ;; (evil-leader/set-key
-      ;; "f" 'find-file
-      ;; "b" 'switch-to-buffer
-      ;; "d" 'docker
-      ;; "k" 'kill-buffer
-      ;; "s" 'save-buffer
-      ;; "2" 'split-window-below
-      ;; "3" 'split-window-right
-      ;; "0" 'delete-window
-      ;; "o" 'other-window
-      ;; "p" 'ace-window
-      ;; "x" 'counsel-M-x
-      ;; "a" 'align-regexp
-      ;; "g" 'magit-status)
-
       (which-key-mode)
       (add-hook 'after-init-hook 'global-company-mode)
       (yas-global-mode 1)
@@ -80,7 +56,6 @@
 
 
       (diminish 'apheleia-mode)
-      (apheleia-global-mode +1)
 
       (setq magit-refresh-status-buffer nil)
       (global-set-key (kbd "C-c g") 'magit-status)
@@ -143,6 +118,7 @@
       (xah-fly-keys-set-layout "colemak-dh")
       (xah-fly-keys 1)
       (define-key key-translation-map (kbd "C-t") (kbd "C-g"))
+      (define-key key-translation-map (kbd "<f5>") (kbd "C-g"))
 
       ;; put this AFTER loading Xah Fly Keys
 
@@ -176,6 +152,41 @@
       (define-key xah-fly-leader-key-map (kbd "SPC n") 'move-to-window-line-top-bottom)
       (define-key xah-fly-leader-key-map (kbd "RET n") 'move-to-window-line-top-bottom)
 
+  ;; 1. hack escape:
+  
+  (progn
+    (defun xah-fly-keys-escape ()
+      (interactive)
+      (when (region-active-p)
+        (deactivate-mark))
+      (when (active-minibuffer-window)
+        (abort-recursive-edit)))
+  
+    (define-key xah-fly-command-map (kbd "<escape>")     'xah-fly-keys-escape))
+  
+  (progn
+    (defvar xah-fly-keys-fast-keyseq-timeout 200)
+  
+    (defun xah-fly-keys-tty-ESC-filter (map)
+      (if (and (equal (this-single-command-keys) [?\e])
+               (sit-for (/ xah-fly-keys-fast-keyseq-timeout 1000.0)))
+          [escape] map))
+  
+    (defun xah-fly-keys-lookup-key (map key)
+      (catch 'found
+        (map-keymap (lambda (k b) (if (equal key k) (throw 'found b))) map)))
+  
+    (defun xah-fly-keys-catch-tty-ESC ()
+      "Setup key mappings of current terminal to turn a tty's ESC into
+  `escape'."
+      (when (memq (terminal-live-p (frame-terminal)) '(t pc))
+        (let ((esc-binding (xah-fly-keys-lookup-key input-decode-map ?\e)))
+          (define-key input-decode-map
+            [?\e] `(menu-item "" ,esc-binding :filter xah-fly-keys-tty-ESC-filter)))))
+  
+    (xah-fly-keys-catch-tty-ESC)
+
+  (define-key key-translation-map (kbd "ESC") (kbd "<escape>")))
 
       ;; Dired
       (setq dired-dwim-target t)
@@ -235,6 +246,9 @@
         justl
         terraform-mode
         rust-mode
+        org-present
+        doom-themes
+        visual-fill-column
       ]));
   };
 }
