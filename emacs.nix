@@ -44,6 +44,9 @@
       (add-hook 'after-init-hook 'global-company-mode)
       (yas-global-mode 1)
 
+      (vertico-mode 1)
+      (marginalia-mode 1)
+
       ;; TYPESCRIPT
       (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-ts-mode))
       (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
@@ -52,7 +55,6 @@
 
       ;; Rust
       (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-ts-mode))
-
 
       (diminish 'apheleia-mode)
 
@@ -228,6 +230,11 @@
         org-present
         doom-themes
         visual-fill-column
+
+        vertico
+        marginalia
+        consult
+        orderless
       ]));
   };
 }
