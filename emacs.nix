@@ -8,7 +8,6 @@
       (package-initialize)
       (setq ring-bell-function 'ignore)
       (load-theme 'doom-palenight t)
-      ;; (load-theme 'monokai t)
       (global-set-key (kbd "M-<tab>") 'dabbrev-expand)
       (define-key minibuffer-local-map (kbd "M-<tab>") 'dabbrev-expand)
       (setq scroll-margin 0

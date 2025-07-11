@@ -76,6 +76,7 @@ in
     rtorrent
     # pkgs."ruby-3.3.2"
     silver-searcher
+    ripgrep
     tmate
     tmux
     vlc
