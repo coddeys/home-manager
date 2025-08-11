@@ -46,6 +46,11 @@
 
       (vertico-mode 1)
       (marginalia-mode 1)
+      (setq history-length 25)
+      (savehist-mode 1)
+      (recentf-mode 1)
+      (save-place-mode 1)
+
 
       ;; TYPESCRIPT
       (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-ts-mode))
@@ -235,6 +240,7 @@
         marginalia
         consult
         orderless
+        ussian-colemak-dh
       ]));
   };
 }
